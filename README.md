@@ -1,0 +1,2 @@
+# akibasouken
+Akiba Souken API
