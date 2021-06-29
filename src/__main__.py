@@ -144,6 +144,7 @@ import (
   ScrapeScore,
   ScrapeMetadata,
   ScrapeStudio,
+  ScrapeGenre,
 )
 
 
@@ -167,7 +168,7 @@ class Genre():
 
 
 
-  
+
 
 def main():
   site_url = (
@@ -210,7 +211,7 @@ def main():
   id_ = 21435
   id_ = 21397
   id_ = 21478
-  id_ = 1618
+  # id_ = 1618
   url = (
     f'{site_url}/anime/{id_}'
   )
@@ -221,28 +222,32 @@ def main():
   )
 
 
-  # scrape = ScrapeStaff()
-  # staffs = scrape(soup)
-  # pprint(staffs)
+  scrape = ScrapeStaff()
+  staffs = scrape(soup)
+  pprint(staffs)
 
-  # scrape = ScrapeVoiceActor()
-  # actors = scrape(soup)
-  # pprint(actors)
-
-
-  # scrape = ScrapeScore()
-  # score = scrape(soup)
-  # pprint(score)
+  scrape = ScrapeVoiceActor()
+  actors = scrape(soup)
+  pprint(actors)
 
 
-  # scrape = ScrapeMetadata()
-  # metadata = scrape(soup)
-  # pprint(metadata)
+  scrape = ScrapeScore()
+  score = scrape(soup)
+  pprint(score)
+
+
+  scrape = ScrapeMetadata()
+  metadata = scrape(soup)
+  pprint(metadata)
 
 
   scrape = ScrapeStudio()
   studio = scrape(soup)
   pprint(studio)
+
+  scrape = ScrapeGenre()
+  genres = scrape(soup)
+  pprint(genres)
 
 
 
