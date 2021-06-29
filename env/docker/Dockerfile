@@ -1,11 +1,16 @@
-FROM python:3.8.10-alpine
+# FROM python:3.8.10-alpine
+FROM ubuntu:20.04 
 
-
-SHELL ["ash", "-c"]
+# SHELL ["ash", "-c"]
+SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 ARG GECKO_VER=0.29.0
 RUN \
-  wget https://github.com/mozilla/geckodriver/releases/download/v${GECKO_VER}/geckodriver-v${GECKO_VER}-linux64.tar.gz \
+  apt update \
+  && apt install -y \
+  python3-pip \
+  wget \
+  && wget https://github.com/mozilla/geckodriver/releases/download/v${GECKO_VER}/geckodriver-v${GECKO_VER}-linux64.tar.gz \
   && tar -C /usr/bin/ -xvzf geckodriver*.tar.gz \
   && rm geckodriver* \
   && chmod +x /usr/bin/geckodriver
