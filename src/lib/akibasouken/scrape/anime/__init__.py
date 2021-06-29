@@ -17,3 +17,7 @@ from .metadata import (
 from .studio import (
   ScrapeStudio,
 )
+
+from .genre import (
+  ScrapeGenre,
+)
