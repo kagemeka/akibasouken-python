@@ -21,3 +21,7 @@ from .studio import (
 from .genre import (
   ScrapeGenre,
 )
+
+from .long_text import (
+  ScrapeLongText,
+)
