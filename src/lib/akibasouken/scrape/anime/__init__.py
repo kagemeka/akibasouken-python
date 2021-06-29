@@ -13,3 +13,7 @@ from .score import (
 from .metadata import (
   ScrapeMetadata,
 )
+
+from .studio import (
+  ScrapeStudio,
+)
