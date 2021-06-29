@@ -146,6 +146,7 @@ import (
   ScrapeStudio,
   ScrapeGenre,
   ScrapeLongText,
+  ScrapeTag,
 )
 
 
@@ -170,7 +171,6 @@ class LongText():
 class Genre():
   genre_id: int
   name: str
-
 
 
 
@@ -216,8 +216,8 @@ def main():
 
   id_ = 21435
   id_ = 21397
-  # id_ = 21478
-  # id_ = 1618
+  id_ = 21478
+  id_ = 1618
   url = (
     f'{site_url}/anime/{id_}'
   )
@@ -259,7 +259,9 @@ def main():
   long_txt = scrape(soup)
   pprint(long_txt)
 
-
+  scrape = ScrapeTag()
+  tags = scrape(soup)
+  pprint(tags)
 
 
 
