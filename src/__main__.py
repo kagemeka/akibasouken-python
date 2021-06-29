@@ -50,34 +50,6 @@ class ScrapeAnimes():
 import dataclasses 
 
 
-@dataclasses.dataclass
-class Cast():
-  anime_id: int
-  cast_id: int
-  name: str
-
-
-
-class ScrapeCast():
-  ...
-
-
-
-
-@dataclasses.dataclass 
-class Metadata():
-  anime_id: int
-  title: str
-  onair_date: str
-  staff: str
-  site_url: str 
-  twitter_url: str
-
-
-
-
-class ScrapeMetadata():
-  ...
 
 
 
@@ -85,44 +57,44 @@ class ScrapeMetadata():
 
 
 
-class ScrapeAnime():
+# class ScrapeAnime():
   
-  def __call__(
-    self,
-    section: bs4.element.Tag,
-  ) -> Metadata:
-    self.__section = section
-    self.__scrape()
-    return self.__meta
+#   def __call__(
+#     self,
+#     section: bs4.element.Tag,
+#   ) -> Metadata:
+#     self.__section = section
+#     self.__scrape()
+#     return self.__meta
 
-  def __scrape(
-    self,
-  ):
-    section = self.__section
-    id_ = section.get('id')
-    title = section.find(
-      class_='mTitle',
-    ).find('h2').text
-    onair_date = section.find(
-      class_='firstDate',
-    ).text
-    staff = section.find(
-      class_='staff',
-    ).text
-    site = section.find(
-      class_='officialSite'
-    ).get('href')
-    twitter = section.find(
-      class_='officialTwitter',
-    ).get('href')
-    self.__meta = Metadata(
-      id_,
-      title,
-      onair_date,
-      staff,
-      site,
-      twitter,
-    )
+#   def __scrape(
+#     self,
+#   ):
+#     section = self.__section
+#     id_ = section.get('id')
+#     title = section.find(
+#       class_='mTitle',
+#     ).find('h2').text
+#     onair_date = section.find(
+#       class_='firstDate',
+#     ).text
+#     staff = section.find(
+#       class_='staff',
+#     ).text
+#     site = section.find(
+#       class_='officialSite'
+#     ).get('href')
+#     twitter = section.find(
+#       class_='officialTwitter',
+#     ).get('href')
+#     self.__meta = Metadata(
+#       id_,
+#       title,
+#       onair_date,
+#       staff,
+#       site,
+#       twitter,
+#     )
 
 
 
@@ -139,14 +111,7 @@ from \
   lib.akibasouken \
   .scrape.anime \
 import (
-  ScrapeStaff,
-  ScrapeVoiceActor,
-  ScrapeScore,
-  ScrapeMetadata,
-  ScrapeStudio,
-  ScrapeGenre,
-  ScrapeLongText,
-  ScrapeTag,
+  ScrapeAnime,
 )
 
 
@@ -156,22 +121,8 @@ import dataclasses
 import re
 import typing
 from typing import (
-  Optional,
+  List,
 )
-
-
-
-@dataclasses.dataclass 
-class LongText():
-  commentary: str
-  overview: str
-
-
-@dataclasses.dataclass 
-class Genre():
-  genre_id: int
-  name: str
-
 
 
 
@@ -180,45 +131,12 @@ def main():
   site_url = (
     "https://akiba-souken.com"
   )
-  # season = "autumn"
-  # path = f'anime/{season}'
-
-  # tg_url = (
-  #   f'{site_url}/{path}'
-  # )
-  # print(tg_url)
-  # res = requests.get(tg_url)
-  # soup = bs4.BeautifulSoup(
-  #   res.content,
-  #   "html.parser",
-  # )
-  # # print(soup.prettify())
-  # header = soup.find("h1").text
-  # print(header)
-
-  # animes = soup.find(
-  #   id='contents',
-  # ).find_all(
-  #   class_='itemBox',
-  # )
-
-  # scrape = ScrapeAnime()
-
-  # for anime in animes:
-  #   try:
-  #     meta = scrape(anime)
-  #   except:
-  #     continue
-  #   staff = unicodedata.normalize(
-  #     'NFKD', meta.staff,
-  #   )
-  #   pprint(staff.split())
 
   id_ = 21435
   id_ = 21397
   id_ = 21478
   id_ = 1618
-  id_ = 21466
+  # id_ = 21466
  
  
   url = (
@@ -230,41 +148,8 @@ def main():
     'html.parser',
   )
 
-
-  scrape = ScrapeStaff()
-  staffs = scrape(soup)
-  pprint(staffs)
-
-  scrape = ScrapeVoiceActor()
-  actors = scrape(soup)
-  pprint(actors)
-
-
-  scrape = ScrapeScore()
-  score = scrape(soup)
-  pprint(score)
-
-
-  scrape = ScrapeMetadata()
-  metadata = scrape(soup)
-  pprint(metadata)
-
-
-  scrape = ScrapeStudio()
-  studio = scrape(soup)
-  pprint(studio)
-
-  scrape = ScrapeGenre()
-  genres = scrape(soup)
-  pprint(genres)
-
-  scrape = ScrapeLongText()
-  long_txt = scrape(soup)
-  pprint(long_txt)
-
-  scrape = ScrapeTag()
-  tags = scrape(soup)
-  pprint(tags)
+  scrape = ScrapeAnime()
+  pprint(scrape(id_))
 
 
 
@@ -272,8 +157,3 @@ def main():
 if __name__ == '__main__':
   main()
 
-
-'''TODO 
-title 
-on air date
-'''
