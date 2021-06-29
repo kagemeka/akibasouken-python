@@ -143,6 +143,7 @@ import (
   ScrapeVoiceActor,
   ScrapeScore,
   ScrapeMetadata,
+  ScrapeStudio,
 )
 
 
@@ -163,7 +164,6 @@ class LongText():
 class Genre():
   genre_id: int
   name: str
-
 
 
 
@@ -235,10 +235,14 @@ def main():
   # pprint(score)
 
 
-  scrape = ScrapeMetadata()
-  metadata = scrape(soup)
-  pprint(metadata)
+  # scrape = ScrapeMetadata()
+  # metadata = scrape(soup)
+  # pprint(metadata)
 
+
+  scrape = ScrapeStudio()
+  studio = scrape(soup)
+  pprint(studio)
 
 
 
