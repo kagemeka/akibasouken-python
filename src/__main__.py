@@ -145,6 +145,7 @@ import (
   ScrapeMetadata,
   ScrapeStudio,
   ScrapeGenre,
+  ScrapeLongText,
 )
 
 
@@ -153,6 +154,10 @@ import bs4
 import dataclasses
 import re
 import typing
+from typing import (
+  Optional,
+)
+
 
 
 @dataclasses.dataclass 
@@ -165,6 +170,7 @@ class LongText():
 class Genre():
   genre_id: int
   name: str
+
 
 
 
@@ -210,7 +216,7 @@ def main():
 
   id_ = 21435
   id_ = 21397
-  id_ = 21478
+  # id_ = 21478
   # id_ = 1618
   url = (
     f'{site_url}/anime/{id_}'
@@ -249,7 +255,9 @@ def main():
   genres = scrape(soup)
   pprint(genres)
 
-
+  scrape = ScrapeLongText()
+  long_txt = scrape(soup)
+  pprint(long_txt)
 
 
 
