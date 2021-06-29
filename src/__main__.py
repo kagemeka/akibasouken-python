@@ -159,7 +159,8 @@ class ScrapeScore():
     self.__id = anime_id
 
   
-  def __scrape
+  def __scrape():
+    ...
 
 
 
