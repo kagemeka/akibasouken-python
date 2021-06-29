@@ -63,9 +63,14 @@ class ScrapeVoiceActor():
     self,
   ) -> typing.NoReturn:
     soup = self.__soup
-    self.__section = soup.find(
-      class_='cast',
-    ).find('dd')
     self.__actors = []
+    section = soup.find(
+      class_='cast',
+    )
+    if section is None: return
+    section = section.find(
+      'dd',
+    )
+    self.__section = section
     self.__get_actors_with_id()
     self.__get_other_actors()
