@@ -164,54 +164,185 @@ class ScrapeScore():
 
 
 
+from \
+  lib.akibasouken \
+  .scrape.anime \
+import (
+  ScrapeStaff,
+)
+
+# import dataclasses
+# import typing
+
+# @dataclasses.dataclass
+# class Staff():
+#   name: str
+#   role: str
+
+
+
+# class ScrapeStaff():
+#   def __calc_combinations(
+#     self,
+#     chunk: str,
+#   ):
+#     from itertools import (
+#       product,
+#     )
+#     m = map(
+#       lambda s: re.split(
+#         r'/|・',
+#         s,
+#       ),
+#       chunk.split(':'),
+#     )
+#     self.__cmbs.append(
+#       product(*m),
+#     )
+    
+
+#   def __call__(
+#     self,
+#     soup: bs4.BeautifulSoup,
+#   ) -> typing.List[Staff]:
+#     self.__soup = soup
+#     self.__scrape()
+#     return [
+#       Staff(name, role)
+#       for role, name in (
+#         self.__staffs
+#       )
+#     ]
+    
+
+  # def  __get_staff_text(
+  #   self,
+  # ):
+  #   soup = self.__soup
+  #   staff = soup.find(
+  #     class_='staff',
+  #   ).find('dd').text
+  #   original = soup.find(
+  #     class_='specBox',
+  #   ).find('table').find_all(
+  #     'td',
+  #   )[0].text
+  #   s = f'{original} {staff}'
+  #   s = self.__rep_whitespaces(
+  #     s,
+  #   )
+  #   s = self.__normalize(s)
+  #   self.__text = s
+  
+
+  # def __normalize(
+  #   self,
+  #   s: str,
+  # ) -> str:
+  #   from unicodedata import (
+  #     normalize,
+  #   )
+  #   return normalize('NFKC', s)
+
+
+  # def __rep_whitespaces(
+  #   self,
+  #   s: str,
+  # ) -> str:
+  #   return ' '.join(s.split())
+
+
+  # def __scrape(
+  #   self,
+  # ) -> typing.NoReturn:
+  #   self.__get_staff_text()
+  #   self.__split_staff_text()
+  #   self.__cmbs = []
+  #   for chunk in self.__staffs:
+  #     self.__calc_combinations(
+  #       chunk,
+  #     )
+  #   from itertools import (
+  #     chain,
+  #   )
+  #   cmbs = chain.from_iterable(
+  #     self.__cmbs,
+  #   )
+  #   self.__staffs = cmbs
+
+
+  # def __split_staff_text(
+  #   self,
+  # ):
+  #   import re 
+  #   ptn = re.compile(
+  #     r'[^:、() ]*:[^:、() ]*',
+  #   )
+  #   self.__staffs = re.findall(
+  #     ptn,
+  #     self.__text,
+    # )
+
+  
+
+
 def main():
   site_url = (
     "https://akiba-souken.com"
   )
-  season = "autumn"
-  path = f'anime/{season}'
+  # season = "autumn"
+  # path = f'anime/{season}'
 
-  tg_url = (
-    f'{site_url}/{path}'
+  # tg_url = (
+  #   f'{site_url}/{path}'
+  # )
+  # print(tg_url)
+  # res = requests.get(tg_url)
+  # soup = bs4.BeautifulSoup(
+  #   res.content,
+  #   "html.parser",
+  # )
+  # # print(soup.prettify())
+  # header = soup.find("h1").text
+  # print(header)
+
+  # animes = soup.find(
+  #   id='contents',
+  # ).find_all(
+  #   class_='itemBox',
+  # )
+
+  # scrape = ScrapeAnime()
+
+  # for anime in animes:
+  #   try:
+  #     meta = scrape(anime)
+  #   except:
+  #     continue
+  #   staff = unicodedata.normalize(
+  #     'NFKD', meta.staff,
+  #   )
+  #   pprint(staff.split())
+
+  id_ = 21435
+  id_ = 21397
+  url = (
+    f'{site_url}/anime/{id_}'
   )
-  print(tg_url)
-  res = requests.get(tg_url)
+  response = requests.get(url)
   soup = bs4.BeautifulSoup(
-    res.content,
-    "html.parser",
+    response.content,
+    'html.parser',
   )
-  # print(soup.prettify())
-  header = soup.find("h1").text
-  print(header)
-
-  animes = soup.find(
-    id='contents',
-  ).find_all(
-    class_='itemBox',
-  )
-
-  scrape = ScrapeAnime()
-
-  for anime in animes:
-    try:
-      meta = scrape(anime)
-    except:
-      continue
-    staff = unicodedata.normalize(
-      'NFKD', meta.staff,
-    )
-    pprint(staff.split())
+  scrape = ScrapeStaff()
+  staffs = scrape(soup)
+  pprint(staffs)
 
 
 
 
-  # cols = ["作品名","放送開始日","スタッフ","公式サイト","Link","公式Twitter","URL"]
-  # anime_df = pd.DataFrame(anime_infos,columns=cols)
-  # # 出力
-  # anime_df.to_csv(f"data/{header}.csv",index=False)
 
 
-  # anime_df.to_csv(f"../../twitter/data/output/{header}.csv",index=False)
 
 
 
