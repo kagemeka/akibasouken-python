@@ -135,42 +135,24 @@ class ScrapeComingAnimes():
 
 
 
-@dataclasses.dataclass
-class Score():
-  satisfaction: float
-  stroy: float
-  originality: float
-  drawing: float
-  direction: float
-  charactor: float 
-  voice_actor: float
-  sound: float
-  song: float
-
-
-
-class ScrapeScore():
-  ...
-
-  def __call__(
-    self,
-    anime_id: int,
-  ) -> Score:
-    self.__id = anime_id
-
-  
-  def __scrape():
-    ...
-
-
-
 from \
   lib.akibasouken \
   .scrape.anime \
 import (
   ScrapeStaff,
   ScrapeVoiceActor,
+  ScrapeScore,
 )
+
+
+
+import bs4 
+import dataclasses
+import typing
+
+
+
+
 
 
 
@@ -222,6 +204,7 @@ def main():
   id_ = 21435
   id_ = 21397
   id_ = 21478
+  id_ = 1618
   url = (
     f'{site_url}/anime/{id_}'
   )
@@ -230,13 +213,19 @@ def main():
     response.content,
     'html.parser',
   )
-  # scrape = ScrapeStaff()
-  # staffs = scrape(soup)
-  # pprint(staffs)
+  scrape = ScrapeStaff()
+  staffs = scrape(soup)
+  pprint(staffs)
 
   scrape = ScrapeVoiceActor()
   actors = scrape(soup)
   pprint(actors)
+
+
+  scrape = ScrapeScore()
+  score = scrape(soup)
+  pprint(score)
+  # print(float(None))
 
 
 
