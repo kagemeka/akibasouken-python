@@ -9,3 +9,7 @@ from .voice_actor import (
 from .score import (
   ScrapeScore,
 )
+
+from .metadata import (
+  ScrapeMetadata,
+)

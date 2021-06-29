@@ -142,25 +142,31 @@ import (
   ScrapeStaff,
   ScrapeVoiceActor,
   ScrapeScore,
+  ScrapeMetadata,
 )
 
 
 
 import bs4 
 import dataclasses
+import re
 import typing
 
 
+@dataclasses.dataclass 
+class LongText():
+  commentary: str
+  overview: str
+
+
+@dataclasses.dataclass 
+class Genre():
+  genre_id: int
+  name: str
 
 
 
 
-
-  
-    
-
-
-  
   
 
 def main():
@@ -213,19 +219,25 @@ def main():
     response.content,
     'html.parser',
   )
-  scrape = ScrapeStaff()
-  staffs = scrape(soup)
-  pprint(staffs)
-
-  scrape = ScrapeVoiceActor()
-  actors = scrape(soup)
-  pprint(actors)
 
 
-  scrape = ScrapeScore()
-  score = scrape(soup)
-  pprint(score)
-  # print(float(None))
+  # scrape = ScrapeStaff()
+  # staffs = scrape(soup)
+  # pprint(staffs)
+
+  # scrape = ScrapeVoiceActor()
+  # actors = scrape(soup)
+  # pprint(actors)
+
+
+  # scrape = ScrapeScore()
+  # score = scrape(soup)
+  # pprint(score)
+
+
+  scrape = ScrapeMetadata()
+  metadata = scrape(soup)
+  pprint(metadata)
 
 
 
