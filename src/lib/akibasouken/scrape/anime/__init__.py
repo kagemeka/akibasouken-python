@@ -25,3 +25,7 @@ from .genre import (
 from .long_text import (
   ScrapeLongText,
 )
+
+from .tag import (
+  ScrapeTag,
+)
