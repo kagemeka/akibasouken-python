@@ -118,6 +118,7 @@ from \
   .scrape.yearly_anime \
 import (
   ScrapeTwitter,
+  ScrapeBroadcast,
 )
 
 
@@ -130,6 +131,7 @@ import typing
 from typing import (
   Optional,
 )
+
 
 
 
@@ -176,10 +178,11 @@ def main():
     class_='itemBox',
   )
   scrape = ScrapeTwitter()
+  scrape = ScrapeBroadcast()
   for anime in animes:
     # print(anime)
     pprint(scrape(anime))
-    break
+    # break
     # break
 
 
