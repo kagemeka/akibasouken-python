@@ -49,6 +49,7 @@ class ScrapeBroadcast():
     elm = self.__section.find(
       class_='schedule',
     )
+    if elm is None: return
     elms = elm.find_all('td')
     for elm in elms:
       self.__get_unit(elm)
