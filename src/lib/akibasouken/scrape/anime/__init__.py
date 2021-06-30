@@ -60,7 +60,7 @@ class Anime():
   ]
   score: Score
   metadata: Metadata
-  studio: Studio
+  studios: List[Studio]
   genres: List[Genre]
   long_text: LongText
   tags: List[Tag]
