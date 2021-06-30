@@ -12,7 +12,7 @@ class Metadata():
   title: str 
   media: str
   year: int
-  season: int
+  season: Optional[int] = None
   official_site: Optional[
     str
   ] = None
@@ -76,12 +76,19 @@ class ScrapeMetadata():
       'dd',
     ).find('a').get('href')
     ptn = re.compile(
-      r'^.*\?season=(\d+)'
-      r'&year=(\d+)$',
+      r'^.*season=(\d+).*$',
     )
     m = re.match(ptn, url)
-    self.__year = m.group(2)
-    self.__season = m.group(1)
+    self.__season = (
+      m.group(1) if m else None
+    )
+    ptn = re.compile(
+      r'^.*year=(\d+).*$',
+    )
+    m = re.match(ptn, url)
+    self.__year = (
+      m.group(1) if m else None
+    )
   
 
   def __get_official_site(
