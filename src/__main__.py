@@ -146,7 +146,7 @@ def main():
   id_ = 21478
   id_ = 1618
   id_ = 21466
- 
+  id_ = 21296
  
   url = (
     f'{site_url}/anime/{id_}'
