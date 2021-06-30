@@ -112,6 +112,7 @@ from \
   .scrape.anime \
 import (
   ScrapeAnime,
+  Anime,
 )
 from \
   lib.akibasouken \
@@ -119,6 +120,8 @@ from \
 import (
   ScrapeTwitter,
   ScrapeBroadcast,
+  Twitter,
+  Broadcast,
 )
 
 
@@ -130,11 +133,52 @@ import re
 import typing
 from typing import (
   Optional,
+  List,
 )
 
 
+@dataclasses.dataclass
+class YearlyAnime(
+  Anime,
+):
+  twitter: Twitter
+  boardcasts: List[Broadcast]
 
 
+  
+
+class ScrapeYearlyAnime():
+
+  def __call__(
+    self,
+    section: bs4.element.Tag,
+  ) -> YearlyAnime:
+    self.__section = section
+    self.__scrape()
+
+  
+  def __get_anime_id(
+    self,
+  ) -> typing.NoReturn:
+    url = self.__section.find(
+      class_='mTitle',
+    ).find('a').get('href')
+    id_ = url.split('/')[-2]
+    self.__id = int(id_)
+
+
+
+  def __scrape(
+    self,
+  ) -> typing.NoReturn:
+    self.__get_anime_id()
+    anime =  ScrapeAnime()(
+      self.__id,
+    )
+    print(anime)
+  
+
+  
 
 
 
@@ -179,9 +223,11 @@ def main():
   )
   scrape = ScrapeTwitter()
   scrape = ScrapeBroadcast()
+  scrape = ScrapeYearlyAnime()
   for anime in animes:
     # print(anime)
-    pprint(scrape(anime))
+    scrape(anime)
+    print()
     # break
     # break
 
