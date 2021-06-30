@@ -144,7 +144,7 @@ class AdamAkibasouken():
   ) -> typing.NoReturn:
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(
-      'arbitral-test',
+      'av-adam-entrance',
     )
     obj = bucket.Object(
       self.__upload_path,
