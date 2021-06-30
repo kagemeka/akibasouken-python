@@ -148,17 +148,17 @@ def main():
   id_ = 21466
  
  
-  # url = (
-  #   f'{site_url}/anime/{id_}'
-  # )
-  # response = requests.get(url)
-  # soup = bs4.BeautifulSoup(
-  #   response.content,
-  #   'html.parser',
-  # )
+  url = (
+    f'{site_url}/anime/{id_}'
+  )
+  response = requests.get(url)
+  soup = bs4.BeautifulSoup(
+    response.content,
+    'html.parser',
+  )
 
-  # scrape = ScrapeAnime()
-  # pprint(scrape(id_))
+  scrape = ScrapeAnime()
+  pprint(scrape(id_))
 
   url = (
     f'{site_url}/anime/spring'
@@ -179,6 +179,7 @@ def main():
   for anime in animes:
     # print(anime)
     pprint(scrape(anime))
+    break
     # break
 
 

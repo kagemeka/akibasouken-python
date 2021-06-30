@@ -2,7 +2,9 @@ import bs4
 import dataclasses
 import re
 import typing
-
+from typing import (
+  Optional,
+)
 
 
 @dataclasses.dataclass 
@@ -11,7 +13,12 @@ class Metadata():
   media: str
   year: int
   season: int
-  official_site: str = None
+  official_site: Optional[
+    str
+  ] = None
+  copyright_: Optional[str] = (
+    None
+  )
   
 
 
@@ -32,12 +39,14 @@ class ScrapeMetadata():
     self.__get_title_media()
     self.__get_year_season()
     self.__get_official_site()
+    self.__get_copyright()
     self.__meta = Metadata(
       self.__title,
       self.__media,
       self.__year,
       self.__season,
       self.__official_site,
+      self.__copyright,
     )
   
 
@@ -86,3 +95,14 @@ class ScrapeMetadata():
       else None 
     )
     self.__official_site = url
+
+  
+  def __get_copyright(
+    self,
+  ) -> typing.NoReturn:
+    elm = self.__soup.find(
+      class_='copyright',
+    )
+    self.__copyright = (
+      elm.text if elm else None
+    )
