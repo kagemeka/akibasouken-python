@@ -36,7 +36,7 @@ class ScrapeComingAnimes():
   ) -> typing.NoReturn:
     dt = datetime.now()
     i = (dt.month - 1) // 3
-    i = (i + 1) % 4
+    i = (i + 2) % 4
     season = self.__SEASON[i]
     print(season)
     self.__season = season
