@@ -10,6 +10,7 @@ RUN \
   && apt install -y \
   python3-pip \
   wget \
+  zip \
   && wget https://github.com/mozilla/geckodriver/releases/download/v${GECKO_VER}/geckodriver-v${GECKO_VER}-linux64.tar.gz \
   && tar -C /usr/bin/ -xvzf geckodriver*.tar.gz \
   && rm geckodriver* \
