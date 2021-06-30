@@ -113,6 +113,13 @@ from \
 import (
   ScrapeAnime,
 )
+from \
+  lib.akibasouken \
+  .scrape.yearly_anime \
+import (
+  ScrapeTwitter,
+)
+
 
 
 
@@ -121,8 +128,10 @@ import dataclasses
 import re
 import typing
 from typing import (
-  List,
+  Optional,
 )
+
+
 
 
 
@@ -136,20 +145,42 @@ def main():
   id_ = 21397
   id_ = 21478
   id_ = 1618
-  # id_ = 21466
+  id_ = 21466
  
  
+  # url = (
+  #   f'{site_url}/anime/{id_}'
+  # )
+  # response = requests.get(url)
+  # soup = bs4.BeautifulSoup(
+  #   response.content,
+  #   'html.parser',
+  # )
+
+  # scrape = ScrapeAnime()
+  # pprint(scrape(id_))
+
   url = (
-    f'{site_url}/anime/{id_}'
+    f'{site_url}/anime/spring'
   )
+
   response = requests.get(url)
   soup = bs4.BeautifulSoup(
     response.content,
     'html.parser',
   )
 
-  scrape = ScrapeAnime()
-  pprint(scrape(id_))
+  animes = soup.find(
+    id='contents',
+  ).find_all(
+    class_='itemBox',
+  )
+  scrape = ScrapeTwitter()
+  for anime in animes:
+    # print(anime)
+    pprint(scrape(anime))
+    # break
+
 
 
 
