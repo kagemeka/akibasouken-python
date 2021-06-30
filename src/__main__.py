@@ -112,16 +112,12 @@ from \
   .scrape.anime \
 import (
   ScrapeAnime,
-  Anime,
 )
 from \
   lib.akibasouken \
   .scrape.yearly_anime \
 import (
-  ScrapeTwitter,
-  ScrapeBroadcast,
-  Twitter,
-  Broadcast,
+  ScrapeYearlyAnime,
 )
 
 
@@ -129,6 +125,9 @@ import (
 
 import bs4 
 import dataclasses
+from dataclasses import (
+  astuple,
+)
 import re
 import typing
 from typing import (
@@ -136,49 +135,6 @@ from typing import (
   List,
 )
 
-
-@dataclasses.dataclass
-class YearlyAnime(
-  Anime,
-):
-  twitter: Twitter
-  boardcasts: List[Broadcast]
-
-
-  
-
-class ScrapeYearlyAnime():
-
-  def __call__(
-    self,
-    section: bs4.element.Tag,
-  ) -> YearlyAnime:
-    self.__section = section
-    self.__scrape()
-
-  
-  def __get_anime_id(
-    self,
-  ) -> typing.NoReturn:
-    url = self.__section.find(
-      class_='mTitle',
-    ).find('a').get('href')
-    id_ = url.split('/')[-2]
-    self.__id = int(id_)
-
-
-
-  def __scrape(
-    self,
-  ) -> typing.NoReturn:
-    self.__get_anime_id()
-    anime =  ScrapeAnime()(
-      self.__id,
-    )
-    print(anime)
-  
-
-  
 
 
 
@@ -204,7 +160,7 @@ def main():
   )
 
   scrape = ScrapeAnime()
-  pprint(scrape(id_))
+  # pprint(scrape(id_))
 
   url = (
     f'{site_url}/anime/spring'
@@ -221,16 +177,13 @@ def main():
   ).find_all(
     class_='itemBox',
   )
-  scrape = ScrapeTwitter()
-  scrape = ScrapeBroadcast()
+
   scrape = ScrapeYearlyAnime()
   for anime in animes:
-    # print(anime)
-    scrape(anime)
+    anime = scrape(anime)
+    pprint(anime)
     print()
     # break
-    # break
-
 
 
 
