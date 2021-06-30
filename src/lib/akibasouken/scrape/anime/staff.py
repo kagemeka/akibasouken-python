@@ -50,9 +50,15 @@ class ScrapeStaff():
     self,
   ):
     soup = self.__soup
-    staff = soup.find(
+    section = soup.find(
       class_='staff',
-    ).find('dd').text
+    )
+    if section is None:
+      self.__text = ''
+      return
+    staff = section.find(
+      'dd',
+    ).text
     original = soup.find(
       class_='specBox',
     ).find('table').find_all(

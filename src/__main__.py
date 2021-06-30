@@ -12,128 +12,18 @@ from pprint import (
   pprint,
 )
 
-import unicodedata
-
-class ScrapeAnimes():
-  
-
-  def __calc_season(
-    self,
-  ):
-    season = 'autumn'
-    self.__saeson = season
-    ...
-
-
-  def __call__(
-    self,
-  ):
-    ...
-
-
-  
-  
-
-  def __init__(
-    self,
-  ):
-    self.__site_utl = (
-      'https://'
-      'akiba-souken.com/'
-    )
-    self.__calc_season()
-
-
-    # ... 
-
-
-import dataclasses 
-
-
-
-
-
-
-
-
-
-# class ScrapeAnime():
-  
-#   def __call__(
-#     self,
-#     section: bs4.element.Tag,
-#   ) -> Metadata:
-#     self.__section = section
-#     self.__scrape()
-#     return self.__meta
-
-#   def __scrape(
-#     self,
-#   ):
-#     section = self.__section
-#     id_ = section.get('id')
-#     title = section.find(
-#       class_='mTitle',
-#     ).find('h2').text
-#     onair_date = section.find(
-#       class_='firstDate',
-#     ).text
-#     staff = section.find(
-#       class_='staff',
-#     ).text
-#     site = section.find(
-#       class_='officialSite'
-#     ).get('href')
-#     twitter = section.find(
-#       class_='officialTwitter',
-#     ).get('href')
-#     self.__meta = Metadata(
-#       id_,
-#       title,
-#       onair_date,
-#       staff,
-#       site,
-#       twitter,
-#     )
-
-
-
-
-
-
-class ScrapeComingAnimes():
-  ...
-
+import unicodedata  
 
 
 
 from \
-  lib.akibasouken \
-  .scrape.anime \
+  lib.akibasouken.scrape \
+  .coming_animes \
 import (
-  ScrapeAnime,
-)
-from \
-  lib.akibasouken \
-  .scrape.yearly_anime \
-import (
-  ScrapeYearlyAnime,
+  ScrapeComingAnimes,
 )
 
 
-
-
-import bs4 
-import dataclasses
-from dataclasses import (
-  astuple,
-)
-import re
-import typing
-from typing import (
-  Optional,
-  List,
-)
 
 
 
@@ -148,43 +38,27 @@ def main():
   id_ = 21478
   id_ = 1618
   id_ = 21466
-  id_ = 21296
+  # id_ = 21296
  
-  url = (
-    f'{site_url}/anime/{id_}'
-  )
-  response = requests.get(url)
-  soup = bs4.BeautifulSoup(
-    response.content,
-    'html.parser',
-  )
+  # url = (
+  #   f'{site_url}/anime/{id_}'
+  # )
+  # response = requests.get(url)
+  # soup = bs4.BeautifulSoup(
+  #   response.content,
+  #   'html.parser',
+  # )
 
-  scrape = ScrapeAnime()
+  # scrape = ScrapeAnime()
   # pprint(scrape(id_))
 
-  url = (
-    f'{site_url}/anime/spring'
-  )
 
-  response = requests.get(url)
-  soup = bs4.BeautifulSoup(
-    response.content,
-    'html.parser',
-  )
-
-  animes = soup.find(
-    id='contents',
-  ).find_all(
-    class_='itemBox',
-  )
-
-  scrape = ScrapeYearlyAnime()
+  scrape = ScrapeComingAnimes()
+  animes = scrape()
   for anime in animes:
-    anime = scrape(anime)
     pprint(anime)
-    print()
     # break
-
+    print()
 
 
 

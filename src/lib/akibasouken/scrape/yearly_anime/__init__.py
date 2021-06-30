@@ -74,6 +74,14 @@ class ScrapeYearlyAnime():
       for scrape in scrapes
     )
     self.__anime = YearlyAnime(
-      *astuple(anime),
+      anime.anime_id,
+      anime.staffs,
+      anime.voice_actors,
+      anime.score,
+      anime.metadata,
+      anime.studios,
+      anime.genres,
+      anime.long_text,
+      anime.tags,
       *res,
     )
