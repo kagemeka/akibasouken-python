@@ -9,8 +9,9 @@ from typing import (
 
 @dataclasses.dataclass
 class Twitter():
-  url: Optional[str] = None
-
+  username: Optional[str] = (
+    None
+  )
 
 
 class ScrapeTwitter():
@@ -34,12 +35,22 @@ class ScrapeTwitter():
       elm.get('href') if elm
       else None
     )
+  
+
+  def __get_username(
+    self,
+  ) -> typing.NoReturn:
+    self.__username = (
+      self.__url.split('/')[-1]
+      if self.__url else None
+    )
 
 
   def __scrape(
     self,
   ) -> typing.NoReturn:
     self.__get_url()
+    self.__get_username()
     self.__twitter = Twitter(
-      self.__url,
+      self.__username,
     )
