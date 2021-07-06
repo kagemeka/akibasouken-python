@@ -5,6 +5,12 @@ import typing
 from typing import (
   Optional,
 )
+from datetime import (
+  datetime,
+)
+from unicodedata import (
+  normalize,
+)
 
 
 @dataclasses.dataclass 
@@ -13,6 +19,9 @@ class Metadata():
   media: str
   year: int
   season: Optional[int] = None
+  date: Optional[
+    datetime.date
+  ] = None 
   official_site: Optional[
     str
   ] = None
@@ -38,6 +47,7 @@ class ScrapeMetadata():
   ) -> typing.NoReturn:
     self.__get_title_media()
     self.__get_year_season()
+    self.__get_date()
     self.__get_official_site()
     self.__get_copyright()
     self.__meta = Metadata(
@@ -45,6 +55,7 @@ class ScrapeMetadata():
       self.__media,
       self.__year,
       self.__season,
+      self.__date,
       self.__official_site,
       self.__copyright,
     )
@@ -90,6 +101,24 @@ class ScrapeMetadata():
       m.group(1) if m else None
     )
   
+  
+  def __get_date(
+    self,
+  ) -> typing.NoReturn:
+    s = self.__soup.find(
+      class_='info_main',
+    ).find_all('dd')[1].text
+    s = normalize('NFKD', s)
+    s = s.rstrip('~')
+    try:
+      dt = datetime.strptime(
+        s,
+        '%Y年%m月%d日'
+      )
+      self.__date = dt.date()
+    except:
+      self.__date = None
+      
 
   def __get_official_site(
     self,
