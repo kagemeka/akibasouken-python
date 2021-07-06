@@ -59,9 +59,7 @@ class AdamAkibasouken():
   ) -> typing.NoReturn:
     dt = datetime.now()
     self.__dt = dt 
-    date = dt.strftime(
-      '%Y%m%d',
-    )
+    date = dt.date()
     self.__save_path = (
       f'/tmp/'
       'akibasouken.csv'
@@ -102,12 +100,6 @@ class AdamAkibasouken():
     )
     twitter = TwitterToDF()(
       anime,
-    )
-    twitter.rename(
-      columns={
-        'url': 'twitter_url',
-      }, 
-      inplace=True,
     )
     return meta.merge(
       twitter,

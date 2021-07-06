@@ -22,7 +22,9 @@ class TwitterToDF():
     anime_id = anime.anime_id
     data = {
       'anime_id': anime_id,
-      **asdict(anime.twitter),
+      'twitter_username': (
+        anime.twitter.username
+      ),
     }
     return pd.Series(
       data,
