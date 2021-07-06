@@ -63,10 +63,8 @@ from lib.adam import (
 )
 
 
-def lambda_handler(
-  event,
-  context,
-):
+
+def main():
   site_url = (
     "https://akiba-souken.com"
   )
@@ -77,4 +75,15 @@ def lambda_handler(
 
 
 
-# lambda_handler(None, None)
+def lambda_handler(
+  event,
+  context,
+):
+
+  main()
+
+
+
+
+if __name__ == '__main__':
+  main()

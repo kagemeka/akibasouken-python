@@ -4,7 +4,7 @@ version: '3.9'
 services:
   scrape:
     build:
-      context: ..
+      context: $ROOT/scrape/env
       dockerfile:
         docker/Dockerfile
     env_file:
@@ -29,9 +29,9 @@ services:
         read_only: false 
         volume:
           nocopy: true
-      
       - type: bind
         source: ~/.aws
         target: /root/.aws
         read_only: true
+    working_dir: /root/scrape/
       
