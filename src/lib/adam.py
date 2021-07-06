@@ -63,7 +63,7 @@ class AdamAkibasouken():
       '%Y%m%d',
     )
     self.__save_path = (
-      f'/tmp/{date}/'
+      f'/tmp/'
       'akibasouken.csv'
     )
     self.__upload_path = (
