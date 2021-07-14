@@ -1,44 +1,39 @@
-from \
-  lib.akibasouken.scrape \
-  .coming_animes \
-import (
-  ScrapeComingAnimes,
-)
-
 import dataclasses
 from dataclasses import (
   asdict,
 )
 import typing
 import pandas as pd
-
-from \
-  lib.akibasouken.scrape \
-  .yearly_anime \
-import (
-  YearlyAnime,
-)
-
-from \
-  lib.akibasouken.store \
-  .dataframe.anime \
-import (
-  MetadataToDF,
-)
-
-from \
-  lib.akibasouken.store \
-  .dataframe.yearly_anime \
-import (
-  TwitterToDF,
-)
-
 from datetime import (
   datetime,
 )
 
 import os
 import boto3
+from \
+  kgmk.akibasouken.scrape \
+  .coming_animes \
+import (
+  ScrapeComingAnimes,
+)
+from \
+  kgmk.akibasouken.scrape \
+  .yearly_anime \
+import (
+  YearlyAnime,
+)
+from \
+  kgmk.akibasouken.df.anime \
+import (
+  MetadataToDF,
+)
+from \
+  kgmk.akibasouken.df \
+  .yearly_anime \
+import (
+  TwitterToDF,
+)
+
 
 
 class AdamAkibasouken():
