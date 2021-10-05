@@ -1,14 +1,9 @@
+import typing
+from lib.adam import AdamAkibasouken
 
-from lib.adam import (
-  AdamAkibasouken,
-)
-
-# from kgmk.akibasouken
 
 def main():
-  site_url = (
-    "https://akiba-souken.com"
-  )
+  site_url = "https://akiba-souken.com"
 
 
   adam = AdamAkibasouken()
@@ -16,10 +11,7 @@ def main():
 
 
 
-def lambda_handler(
-  event,
-  context,
-):
+def lambda_handler(event, context) -> typing.NoReturn:
 
   main()
 
