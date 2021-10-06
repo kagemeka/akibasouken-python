@@ -1,7 +1,7 @@
 import bs4 
 import dataclasses
 import typing
-
+import re 
 
 
 @dataclasses.dataclass
@@ -15,7 +15,11 @@ def _scrape_twitter(section: bs4.element.Tag) -> Twitter:
     return elm.get('href') if elm else None
   
   def get_username(url: str) -> typing.Optional[str]:
-    return url.split('/')[-1]
+    ptn = re.compile(
+      r'^.*twitter.com\/(intent\/.*=)?(.*[^\/])\/?$',
+    )
+    m = re.match(ptn, url)
+    return m.groups()[-1]
   
   url = get_url()
   username = None if url is None else get_username(url)

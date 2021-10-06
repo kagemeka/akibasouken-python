@@ -43,8 +43,8 @@ def _scrape_metadata(soup: bs4.BeautifulSoup) -> Metadata:
   def get_date() -> typing.Optional[datetime.datetime]:
     s = soup.find(class_='info_main').find_all('dd')[1].text
     s = unicodedata.normalize('NFKD', s)
-    s = s.rstrip('~')
     try:
+      s = s.strip('~').split('~')[0]
       dt = datetime.datetime.strptime(s, '%Y年%m月%d日')
       date = dt.date()
     except Exception as e:
