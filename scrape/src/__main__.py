@@ -8,9 +8,7 @@ def main():
 
 
 def lambda_handler(event, context) -> typing.NoReturn:
-
-  main()
-
+  update_current_animes()
 
 
 
