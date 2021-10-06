@@ -1,10 +1,6 @@
-from .twitter import (
-  TwitterToDF,
-)
-
-
 import dataclasses
 import pandas as pd
+from .twitter import twitter_to_df
 
 
 @dataclasses.dataclass

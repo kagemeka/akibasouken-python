@@ -1,13 +1,9 @@
 import typing
-from lib.adam import AdamAkibasouken
+from lib.adam import update_current_animes
 
 
 def main():
-  site_url = "https://akiba-souken.com"
-
-
-  adam = AdamAkibasouken()
-  adam()
+  update_current_animes()
 
 
 
