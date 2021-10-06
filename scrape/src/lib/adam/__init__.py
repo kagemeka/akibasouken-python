@@ -26,7 +26,9 @@ def update_current_animes() -> typing.NoReturn:
 
 def make_dataframe(anime: YearlyAnime) -> pd.DataFrame:
   meta = metadata_to_df(anime)
-  twitter = twitter_to_df(anime)
+  twitter = twitter_to_df(anime).rename(
+    columns={'username': 'twitter_username'},
+  )
   return meta.merge(twitter, how='left', on='anime_id')
 
 
